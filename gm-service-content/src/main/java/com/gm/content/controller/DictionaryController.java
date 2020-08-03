@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/dictinaries")
-
-public class DictionaryController extends BaseController {
+public class DictionaryController {
 
     @Autowired
     IDictionariesService dictionariesService;
@@ -19,5 +18,6 @@ public class DictionaryController extends BaseController {
         return dictionariesService.queryAllDictionnaries();
     }
 
+    
 
 }

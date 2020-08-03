@@ -21,6 +21,7 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+    open-in-view: true
   redis:
     database: 0
     timeout: 0

@@ -1,4 +1,4 @@
-package com.gm.content.commens;
+package com.gm.content.commens.aop;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.aspectj.lang.JoinPoint;

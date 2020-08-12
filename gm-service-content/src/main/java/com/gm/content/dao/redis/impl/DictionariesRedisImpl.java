@@ -18,9 +18,7 @@ public class DictionariesRedisImpl implements DictionariesRedis {
     }
 
     @Override
-    public void deleteDictionariesBySno(String sno) {
-
-    }
+    public void deleteDictionariesBySno(String sno) { }
 
     @Override
     public Dictionary queryDictionariesBySno(String sno) {

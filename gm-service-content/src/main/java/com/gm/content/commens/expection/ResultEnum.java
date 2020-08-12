@@ -1,8 +1,12 @@
 package com.gm.content.commens.expection;
 
 import lombok.Getter;
-import org.springframework.web.bind.annotation.GetMapping;
 
+/**
+ * @autho: wlj
+ * @descrption: 自定义异常处理枚举类
+ * @time: 2020/08/12
+ */
 @Getter
 public enum ResultEnum  implements StatusCode{
 
@@ -15,10 +19,12 @@ public enum ResultEnum  implements StatusCode{
     private Integer code;
     private String msg;
 
+    //构造函数
     ResultEnum(Integer code,String msg) {
         this.code = code;
         this.msg = msg;
     }
+
 
 
 }

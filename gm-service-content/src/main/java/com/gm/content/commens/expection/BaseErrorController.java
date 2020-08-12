@@ -3,6 +3,7 @@ package com.gm.content.commens.expection;
 import com.gm.content.domain.ResponseResult;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -19,8 +20,11 @@ public class BaseErrorController implements ErrorController {
         return null;
     }
 
-    @RequestMapping
+    @RequestMapping(produces = "text/html;charset=UTF-8")
+    @ResponseBody
     public ResponseResult handleError() {
         return new ResponseResult(ResultEnum.PAGE_NOT_EXIT);
     }
+
+//    @RequestMapping(produces = ,consumes = )
 }

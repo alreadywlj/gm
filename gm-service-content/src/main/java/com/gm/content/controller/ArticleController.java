@@ -1,5 +1,6 @@
 package com.gm.content.controller;
 
+import com.gm.content.commens.expection.ResultEnum;
 import com.gm.content.domain.Article;
 import com.gm.content.domain.ResponseResult;
 import com.gm.content.service.IArticleService;
@@ -9,7 +10,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/articles")
@@ -36,23 +38,42 @@ public class ArticleController {
     }
 
     @PostMapping
-    public ResponseResult createArticle(@Validated @RequestBody Article article) {
-        return null;
+    public ResponseResult createArticle(@Validated  @RequestBody Article article) {
+
+        System.out.println(article);
+
+        boolean b = articleService.createArticle(article);
+
+        return b ? new ResponseResult(ResultEnum.SUCCESS) : new ResponseResult(ResultEnum.ERROR);
+
     }
 
     @PutMapping("/{id}")
     public ResponseResult updArticle(@PathVariable(value = "id", required = true) String id, @Validated @RequestBody Article article) {
-        return null;
+
+        System.out.println(id);
+
+        boolean b = articleService.updArticle(article, id);
+
+        return b ? new ResponseResult(ResultEnum.ERROR) : new ResponseResult(ResultEnum.SUCCESS);
+
     }
 
     @DeleteMapping("/{id}")
     public ResponseResult delArticle(@PathVariable(value = "id", required = true) String id) {
-        return null;
+
+        boolean b = articleService.delArticle(id);
+
+        return b ? new ResponseResult(ResultEnum.ERROR) : new ResponseResult(ResultEnum.SUCCESS);
     }
 
     @GetMapping("/{id}")
     public ResponseResult queryDetailArticle(@PathVariable(value = "id", required = true) String id) {
-        return null;
+
+        Optional<Article> article = articleService.queryDetailArticle(id);
+
+        return new ResponseResult(article);
+
     }
 
 

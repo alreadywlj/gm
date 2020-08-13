@@ -6,6 +6,7 @@ import com.gm.content.domain.Dictionary;
 import com.gm.content.service.IDictionariesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import springfox.documentation.annotations.Cacheable;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -25,4 +26,6 @@ public class DictionariesServiceImpl implements IDictionariesService {
         List<Dictionary> all = dictionaryMapper.findAllDic();
         return  all.toString();
     }
+
+
 }

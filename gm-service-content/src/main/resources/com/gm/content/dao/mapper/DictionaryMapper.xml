@@ -18,5 +18,11 @@
         dictionary
     </select>
 
+    <select id="findById" resultMap="dicBaseMap" parameterType="string">
+        select * from
+        dictionary where d_id = #{id}
+
+    </select>
+
 
 </mapper>

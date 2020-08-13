@@ -2,6 +2,7 @@ package com.gm.content.dao.mapper;
 
 import com.gm.content.domain.Dictionary;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -9,4 +10,6 @@ import java.util.List;
 public interface DictionaryMapper {
 
     List<Dictionary> findAllDic();
+
+    Dictionary findById(@Param("id") String id);
 }

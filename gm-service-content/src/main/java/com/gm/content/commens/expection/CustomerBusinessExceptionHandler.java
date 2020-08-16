@@ -1,7 +1,9 @@
 package com.gm.content.commens.expection;
 
 import com.gm.content.domain.ResponseResult;
+import org.apache.ibatis.binding.BindingException;
 import org.hibernate.exception.DataException;
+import org.hibernate.exception.GenericJDBCException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -31,22 +33,23 @@ public class CustomerBusinessExceptionHandler {
 
     @ExceptionHandler({BussinessExecption.class})
     public ResponseResult bussinessExceptionHandler(BussinessExecption e) {
-        return new ResponseResult(e.getCode(),e.getMessage());
+        return new ResponseResult(e.getCode(), e.getMessage());
     }
 
     @ExceptionHandler({SQLException.class})
+    @ResponseBody
     public ResponseResult tranSqlException(SQLException e) {
-        return new ResponseResult(e.getErrorCode(),e.getMessage());
+        return new ResponseResult(e.getErrorCode(), e.getMessage());
     }
 
     @ExceptionHandler({HttpMessageNotReadableException.class})
     public ResponseResult tryHttpMessageNotReadableException(HttpMessageNotReadableException e) {
-        return new ResponseResult(ResultEnum.ERROR,e.getMessage());
+        return new ResponseResult(ResultEnum.ERROR, e.getMessage());
     }
 
     @ExceptionHandler({UnexpectedTypeException.class})
     public ResponseResult tryUnexpectedTypeException(UnexpectedTypeException e) {
-        return new ResponseResult(ResultEnum.ERROR,e.getMessage());
+        return new ResponseResult(ResultEnum.ERROR, e.getMessage());
     }
 
     //处理请求参数格式错误 @RequestParam上validate失败后抛出的异常是
@@ -55,21 +58,21 @@ public class CustomerBusinessExceptionHandler {
     @ResponseBody
     public ResponseResult tryConstraintViolationException(ConstraintViolationException e) {
         String message = e.getConstraintViolations().stream().map(ConstraintViolation::getMessage).collect(Collectors.joining());
-        return new ResponseResult(ResultEnum.ERROR,message);
+        return new ResponseResult(ResultEnum.ERROR, message);
     }
 
     //事务异常
     @ExceptionHandler({TransactionSystemException.class})
     public ResponseResult tryTransactionSystemException(TransactionSystemException e) {
-        return new ResponseResult(ResultEnum.ERROR,e.getMessage());
+        return new ResponseResult(ResultEnum.ERROR, e.getMessage());
     }
 
-     //处理Get请求中 使用@Valid 验证路径中请求实体校验失败后抛出的异常，
+    //处理Get请求中 使用@Valid 验证路径中请求实体校验失败后抛出的异常，
     @ExceptionHandler({BindException.class})
     @ResponseBody
     public ResponseResult tryBindException(BindException e) {
         String message = e.getBindingResult().getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining());
-        return new ResponseResult(ResultEnum.ERROR,message);
+        return new ResponseResult(ResultEnum.ERROR, message);
     }
 
     //处理请求参数格式错误 @RequestBody上validate失败后抛出的异常是MethodArgumentNotValidException异常。
@@ -77,21 +80,34 @@ public class CustomerBusinessExceptionHandler {
     @ResponseBody
     public ResponseResult MethodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
         String message = e.getBindingResult().getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining());
-        return new ResponseResult(ResultEnum.ERROR,message);
+        return new ResponseResult(ResultEnum.ERROR, message);
     }
 
     @ExceptionHandler({DataException.class})
     @ResponseBody
     public ResponseResult tryDataException(DataException e) {
         String message = e.getSQLException().getMessage();
-        return new ResponseResult(ResultEnum.ERROR,message);
+        return new ResponseResult(ResultEnum.ERROR, message);
     }
 
     @ExceptionHandler({DataIntegrityViolationException.class})
     @ResponseBody
-    public ResponseResult tryDataIntegrityViolationException(DataIntegrityViolationException e){
+    public ResponseResult tryDataIntegrityViolationException(DataIntegrityViolationException e) {
         String message = e.getMostSpecificCause().getMessage();
-        return new ResponseResult(ResultEnum.ERROR,message);
+        return new ResponseResult(ResultEnum.ERROR, message);
+    }
+
+    @ExceptionHandler({GenericJDBCException.class})
+    @ResponseBody  //数据库字段和传入的字段不匹配
+    public ResponseResult tryDataIntegrityViolationException(GenericJDBCException e) {
+        String message = e.getMessage();
+        return new ResponseResult(ResultEnum.ERROR, message);
+    }
+
+    @ExceptionHandler({Exception.class})
+    public ResponseResult tryException(Exception e) {
+        String message = e.getMessage();
+        return new ResponseResult(ResultEnum.ERROR, message);
     }
 
 }

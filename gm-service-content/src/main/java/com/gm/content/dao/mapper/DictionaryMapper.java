@@ -11,5 +11,9 @@ public interface DictionaryMapper {
 
     List<Dictionary> findAllDic();
 
-    Dictionary findById(@Param("id") String id);
+    Dictionary findById(@Param("id") int id);
+
+    void delById(int id);
+
+    int updateDictionary(Dictionary id);
 }

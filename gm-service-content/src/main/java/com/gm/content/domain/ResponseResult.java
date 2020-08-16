@@ -15,6 +15,7 @@ public class ResponseResult {
 
     private long timeStamp;
 
+
     //手动设置 一个参数
     public ResponseResult(int code, String msg, Object data) {
         this.code = code;

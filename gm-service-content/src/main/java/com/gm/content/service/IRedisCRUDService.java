@@ -4,6 +4,9 @@ import com.gm.content.domain.Dictionary;
 
 public interface IRedisCRUDService {
 
-    public Dictionary selectDictionary(String id);
+    public Dictionary selectDictionary(int id);
 
+    public void delDictionary(int id);
+
+    public Dictionary updateDictionary(int id,Dictionary dictionary);
 }

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gm.content.dao.mapper.DictionaryMapper">
+
     <resultMap type="com.gm.content.domain.Dictionary" id="dicBaseMap">
         <id column="d_id" property="dId"/>
-        <result column="d_desc" property="dDesc"/>
-        <result column="d_desc" property="dDesc"/>
+        <result column="d_name" property="name"/>
+        <result column="d_desc" property="desc"/>
         <result column="create_user" property="createUser"/>
         <result column="update_user" property="updateUser"/>
         <result column="cre_time" property="creTime"/>
@@ -18,11 +19,23 @@
         dictionary
     </select>
 
-    <select id="findById" resultMap="dicBaseMap" parameterType="string">
+    <select id="findById" resultMap="dicBaseMap" parameterType="int">
         select * from
         dictionary where d_id = #{id}
-
     </select>
 
+    <delete id="delById" parameterType="string">
+        delete from dictionary where d_id=#{id}
+    </delete>
+
+    <update id="updateDictionary" parameterType="com.gm.content.domain.Dictionary">
+        update
+        dictionary
+        set
+        d_desc=#{desc},
+        d_name=#{name}
+        where
+        d_id = #{dId}
+    </update>
 
 </mapper>

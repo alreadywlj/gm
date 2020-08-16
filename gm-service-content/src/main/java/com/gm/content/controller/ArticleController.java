@@ -40,8 +40,6 @@ public class ArticleController {
     @PostMapping
     public ResponseResult createArticle(@Validated  @RequestBody Article article) {
 
-        System.out.println(article);
-
         boolean b = articleService.createArticle(article);
 
         return b ? new ResponseResult(ResultEnum.SUCCESS) : new ResponseResult(ResultEnum.ERROR);

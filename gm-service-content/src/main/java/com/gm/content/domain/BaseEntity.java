@@ -6,6 +6,4 @@ import javax.persistence.EntityListeners;
 
 @EntityListeners(AuditingEntityListener.class)
 public class BaseEntity {
-
-
 }

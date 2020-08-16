@@ -1,15 +1,15 @@
 package com.gm.content.domain;
 
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -57,4 +57,5 @@ public class Article implements Serializable {
     @NotBlank(message = "文章标题不允许为空")  //只能作用在String上，不能为null，而且调用trim()后，长度必须大于0
     @Length(min = 10, max = 50, message = "文章标题为10-50个字符")
     private String title;
+
 }

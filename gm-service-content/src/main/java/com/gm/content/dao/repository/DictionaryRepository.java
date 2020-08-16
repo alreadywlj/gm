@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface DictionaryRepository extends PagingAndSortingRepository<Dictionary,String> {
+public interface DictionaryRepository extends PagingAndSortingRepository<Dictionary,Integer> {
 
     @Override
     List<Dictionary> findAll();
